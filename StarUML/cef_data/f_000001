@@ -1,0 +1,483 @@
+[
+    {
+        "domain": "base",
+        "version": {
+            "major": 0,
+            "minor": 1
+        },
+        "commands": [
+            {
+                "name": "enableDebugger",
+                "description": "Attempt to enable the debugger",
+                "parameters": [],
+                "returns": []
+            },
+            {
+                "name": "restartNode",
+                "description": "Attempt to restart the Node server",
+                "parameters": [],
+                "returns": []
+            },
+            {
+                "name": "loadDomainModulesFromPaths",
+                "description": "Attempt to load command modules from the given paths. The paths should be absolute.",
+                "parameters": [
+                    {
+                        "name": "paths",
+                        "type": "array<string>"
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "success",
+                        "type": "boolean"
+                    }
+                ]
+            }
+        ],
+        "events": [
+            {
+                "name": "log",
+                "parameters": [
+                    {
+                        "name": "level",
+                        "type": "string"
+                    },
+                    {
+                        "name": "timestamp",
+                        "type": "Date"
+                    },
+                    {
+                        "name": "message",
+                        "type": "string"
+                    }
+                ]
+            },
+            {
+                "name": "newDomains",
+                "parameters": []
+            }
+        ]
+    },
+    {
+        "domain": "fileWatcher",
+        "version": {
+            "major": 0,
+            "minor": 1
+        },
+        "commands": [
+            {
+                "name": "watchPath",
+                "description": "Start watching a file or directory",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "description": "absolute filesystem path of the file or directory to watch"
+                    }
+                ]
+            },
+            {
+                "name": "unwatchPath",
+                "description": "Stop watching a single file or a directory and it's descendants",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "description": "absolute filesystem path of the file or directory to unwatch"
+                    }
+                ]
+            },
+            {
+                "name": "unwatchAll",
+                "description": "Stop watching all files and directories"
+            }
+        ],
+        "events": [
+            {
+                "name": "change",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string"
+                    },
+                    {
+                        "name": "event",
+                        "type": "string"
+                    },
+                    {
+                        "name": "filename",
+                        "type": "string"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "domain": "MetadataJson",
+        "version": {
+            "major": 0,
+            "minor": 1
+        },
+        "commands": [
+            {
+                "name": "validate",
+                "description": "Returns the validation results",
+                "parameters": [
+                    {
+                        "name": "fullPath",
+                        "type": "string",
+                        "description": "full path name for a file to be validated"
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "result",
+                        "type": "string",
+                        "description": "result"
+                    }
+                ]
+            },
+            {
+                "name": "exportToPDF",
+                "description": "Export diagram(s) to a PDF file",
+                "parameters": [
+                    {
+                        "name": "fullPath",
+                        "type": "string",
+                        "description": "full path name for a .mdj file to be exported to a PDF file"
+                    },
+                    {
+                        "name": "diagramIds",
+                        "type": "Array.<string>",
+                        "description": "Array of diagram's id to be exported"
+                    },
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "description": "filename for an exported PDF"
+                    },
+                    {
+                        "name": "options",
+                        "type": "object",
+                        "description": "options for exporting a PDF file"
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "result",
+                        "type": "string",
+                        "description": "result"
+                    }
+                ]
+            },
+            {
+                "name": "exportToHTML",
+                "description": "Export project to HTML docs",
+                "parameters": [
+                    {
+                        "name": "fullPath",
+                        "type": "string",
+                        "description": "full path name for a .mdj file to be exported to a PDF file"
+                    },
+                    {
+                        "name": "targetDir",
+                        "type": "string",
+                        "description": "path for exported HTML docs"
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "result",
+                        "type": "string",
+                        "description": "result"
+                    }
+                ]
+            },
+            {
+                "name": "registerFont",
+                "description": "Register font",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "description": "Path name containing .ttf font files and font.json"
+                    }
+                ]
+            }
+        ],
+        "events": []
+    },
+    {
+        "domain": "DiagramExport",
+        "version": {
+            "major": 0,
+            "minor": 1
+        },
+        "commands": [
+            {
+                "name": "writeFile",
+                "description": "Returns the total or free memory on the user's system in bytes",
+                "parameters": [
+                    {
+                        "name": "filename",
+                        "type": "string",
+                        "description": "file name"
+                    },
+                    {
+                        "name": "base64Buffer",
+                        "type": "string",
+                        "description": "base64-encoded data"
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "result",
+                        "type": "string",
+                        "description": "result"
+                    }
+                ]
+            }
+        ],
+        "events": []
+    },
+    {
+        "domain": "extensionManager",
+        "version": {
+            "major": 0,
+            "minor": 1
+        },
+        "commands": [
+            {
+                "name": "validate",
+                "description": "Verifies that the contents of the given ZIP file are a valid Brackets extension package",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "description": "absolute filesystem path of the extension package"
+                    },
+                    {
+                        "name": "options",
+                        "type": "{requirePackageJSON: ?boolean}",
+                        "description": "options to control the behavior of the validator"
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "errors",
+                        "type": "string|Array.<string>",
+                        "description": "download error, if any; first string is error code (one of Errors.*); subsequent strings are additional info"
+                    },
+                    {
+                        "name": "metadata",
+                        "type": "{name: string, version: string}",
+                        "description": "all package.json metadata (null if there's no package.json)"
+                    }
+                ]
+            },
+            {
+                "name": "install",
+                "description": "Installs the given Brackets extension if it is valid (runs validation command automatically)",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "description": "absolute filesystem path of the extension package"
+                    },
+                    {
+                        "name": "destinationDirectory",
+                        "type": "string",
+                        "description": "absolute filesystem path where this extension should be installed"
+                    },
+                    {
+                        "name": "options",
+                        "type": "{disabledDirectory: !string, apiVersion: !string, nameHint: ?string, systemExtensionDirectory: !string}",
+                        "description": "installation options: disabledDirectory should be set so that extensions can be installed disabled."
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "errors",
+                        "type": "string|Array.<string>",
+                        "description": "download error, if any; first string is error code (one of Errors.*); subsequent strings are additional info"
+                    },
+                    {
+                        "name": "metadata",
+                        "type": "{name: string, version: string}",
+                        "description": "all package.json metadata (null if there's no package.json)"
+                    },
+                    {
+                        "name": "disabledReason",
+                        "type": "string",
+                        "description": "reason this extension was installed disabled (one of Errors.*), none if it was enabled"
+                    },
+                    {
+                        "name": "installationStatus",
+                        "type": "string",
+                        "description": "Current status of the installation (an extension can be valid but not installed because it's an update"
+                    },
+                    {
+                        "name": "installedTo",
+                        "type": "string",
+                        "description": "absolute path where the extension was installed to"
+                    },
+                    {
+                        "name": "commonPrefix",
+                        "type": "string",
+                        "description": "top level directory in the package zip which contains all of the files"
+                    }
+                ]
+            },
+            {
+                "name": "update",
+                "description": "Updates the given Brackets extension (for which install was generally previously attemped). Brackets must be quit after this.",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "description": "absolute filesystem path of the extension package"
+                    },
+                    {
+                        "name": "destinationDirectory",
+                        "type": "string",
+                        "description": "absolute filesystem path where this extension should be installed"
+                    },
+                    {
+                        "name": "options",
+                        "type": "{disabledDirectory: !string, apiVersion: !string, nameHint: ?string, systemExtensionDirectory: !string}",
+                        "description": "installation options: disabledDirectory should be set so that extensions can be installed disabled."
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "errors",
+                        "type": "string|Array.<string>",
+                        "description": "download error, if any; first string is error code (one of Errors.*); subsequent strings are additional info"
+                    },
+                    {
+                        "name": "metadata",
+                        "type": "{name: string, version: string}",
+                        "description": "all package.json metadata (null if there's no package.json)"
+                    },
+                    {
+                        "name": "disabledReason",
+                        "type": "string",
+                        "description": "reason this extension was installed disabled (one of Errors.*), none if it was enabled"
+                    },
+                    {
+                        "name": "installationStatus",
+                        "type": "string",
+                        "description": "Current status of the installation (an extension can be valid but not installed because it's an update"
+                    },
+                    {
+                        "name": "installedTo",
+                        "type": "string",
+                        "description": "absolute path where the extension was installed to"
+                    },
+                    {
+                        "name": "commonPrefix",
+                        "type": "string",
+                        "description": "top level directory in the package zip which contains all of the files"
+                    }
+                ]
+            },
+            {
+                "name": "remove",
+                "description": "Removes the Brackets extension at the given path.",
+                "parameters": [
+                    {
+                        "name": "path",
+                        "type": "string",
+                        "description": "absolute filesystem path of the installed extension folder"
+                    }
+                ],
+                "returns": {}
+            },
+            {
+                "name": "downloadFile",
+                "description": "Downloads the file at the given URL, saving it to a temp location. Callback receives path to the downloaded file.",
+                "parameters": [
+                    {
+                        "name": "downloadId",
+                        "type": "string",
+                        "description": "Unique identifier for this download 'session'"
+                    },
+                    {
+                        "name": "url",
+                        "type": "string",
+                        "description": "URL to download from"
+                    },
+                    {
+                        "name": "proxy",
+                        "type": "string",
+                        "description": "optional proxy URL"
+                    }
+                ],
+                "returns": {
+                    "type": "string",
+                    "description": "Local path to the downloaded file"
+                }
+            },
+            {
+                "name": "abortDownload",
+                "description": "Aborts any pending download with the given id. Ignored if no download pending (may be already complete).",
+                "parameters": [
+                    {
+                        "name": "downloadId",
+                        "type": "string",
+                        "description": "Unique identifier for this download 'session', previously pased to downloadFile"
+                    }
+                ],
+                "returns": {
+                    "type": "boolean",
+                    "description": "True if the download was pending and able to be canceled; false otherwise"
+                }
+            }
+        ],
+        "events": []
+    },
+    {
+        "domain": "LicenseManager",
+        "version": {
+            "major": 0,
+            "minor": 1
+        },
+        "commands": [
+            {
+                "name": "validate",
+                "description": "Validate License",
+                "parameters": [
+                    {
+                        "name": "PK",
+                        "type": "string",
+                        "description": "PK"
+                    },
+                    {
+                        "name": "name",
+                        "type": "string",
+                        "description": "name of license owner"
+                    },
+                    {
+                        "name": "product",
+                        "type": "string",
+                        "description": "product name"
+                    },
+                    {
+                        "name": "licenseKey",
+                        "type": "string",
+                        "description": "license key"
+                    }
+                ],
+                "returns": [
+                    {
+                        "name": "result",
+                        "type": "object",
+                        "description": "result"
+                    }
+                ]
+            }
+        ],
+        "events": []
+    }
+]

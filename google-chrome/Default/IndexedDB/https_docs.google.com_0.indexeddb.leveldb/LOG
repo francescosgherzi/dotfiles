@@ -1,0 +1,6 @@
+2018/04/20-09:54:24.179 5973 Reusing MANIFEST /home/fra/.config/google-chrome/Default/IndexedDB/https_docs.google.com_0.indexeddb.leveldb/MANIFEST-000001
+2018/04/20-09:54:24.180 5973 Recovering log #3
+2018/04/20-09:54:24.234 5973 Reusing old log /home/fra/.config/google-chrome/Default/IndexedDB/https_docs.google.com_0.indexeddb.leveldb/000003.log 
+2018/04/20-09:54:30.544 6331 Level-0 table #5: started
+2018/04/20-09:54:30.608 6331 Level-0 table #5: 919852 bytes OK
+2018/04/20-09:54:30.616 6331 Delete type=0 #3
